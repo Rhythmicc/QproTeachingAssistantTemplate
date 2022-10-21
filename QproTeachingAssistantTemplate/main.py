@@ -50,7 +50,7 @@ def send():
         sender.send([email], config.select("subject"), content)
 
         QproDefaultConsole.print(QproInfoString, f'发送邮件给 "{email}" 成功!')
-        time.sleep(int(config.select("sleep_time")))
+        time.sleep(float(config.select("sleep_time")))
 
 
 def main():
