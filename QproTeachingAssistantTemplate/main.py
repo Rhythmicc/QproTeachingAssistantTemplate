@@ -26,7 +26,7 @@ def send():
         "git+https://github.com/Rhythmicc/FuckExcel.git",
     )(config.select("students"))
 
-    students_num = students.sheet_size()[1]
+    students_num = students.sheet_size()[0]
 
     with open(config.select("content"), "r") as f:
         content_template = f.read()
