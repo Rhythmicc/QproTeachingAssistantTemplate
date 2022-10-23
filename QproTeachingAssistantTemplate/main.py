@@ -14,31 +14,39 @@ def send():
     import time
 
     sender = Sender(
-        config.select("username"),
+        config.select("email"),
         config.select("password"),
         config.select("smtp_server"),
         config.select("unit"),
     )
 
     students = requirePackage(
-        "FuckExcel", "FuckExcel", "git+https://github.com/Rhythmicc/FuckExcel.git"
+        "FuckExcel",
+        "getFuckExcel",
+        "git+https://github.com/Rhythmicc/FuckExcel.git",
     )(config.select("students"))
 
     """
     xlsx like:
 
-    序号/班级 学号 姓名 邮箱 平时成绩 期末成绩 总评成绩
-    1   2018000001 张三 example.com 100 100 100
+    序号/班级 学号 姓名 邮箱 小测1 小测2 小测3 ... 总评成绩
+    1   2018000001 张三 example.com 100 100 100 ... 100
     """
 
     students_num = students.sheet_size()[1]
 
     with open(config.select("content"), "r") as f:
         content_template = f.read()
-    grade_detail = "平时成绩: {} 分, 期末成绩: {} 分, 总成绩: {} 分"
+    grade_detail = ""
+    for _id, item in enumerate(students[1, 5:-1]):
+        grade_detail += f"{_id + 1}. {item}: " + "{} " + "分<br/>"
+    grade_detail += "总评成绩: {} 分"
+
     for line_id in range(2, students_num):
+        if not all(students[line_id, :]):
+            continue
         email = students[line_id, 4]
-        grade = students[line_id, 5:8]
+        grade = students[line_id, 5:]
         detail = grade_detail.format(*grade)
         content = (
             content_template.replace("__student_name__", students[line_id, 3])
