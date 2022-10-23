@@ -43,7 +43,7 @@ def send():
     grade_detail += "总评成绩: {} 分"
 
     for line_id in range(2, students_num):
-        if not all(students[line_id, :]):
+        if not all(students[line_id, 1:5]):
             continue
         email = students[line_id, 4]
         grade = students[line_id, 5:]
