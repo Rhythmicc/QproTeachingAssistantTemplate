@@ -46,7 +46,7 @@ def send():
         if not all(students[line_id, 1:5]):
             continue
         email = students[line_id, 4]
-        grade = students[line_id, 5:]
+        grade = [i if i else "无" for i in students[line_id, 5:]]
         detail = grade_detail.format(*grade)
         content = (
             content_template.replace("__student_name__", students[line_id, 3])
