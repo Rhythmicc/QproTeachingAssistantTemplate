@@ -26,13 +26,6 @@ def send():
         "git+https://github.com/Rhythmicc/FuckExcel.git",
     )(config.select("students"))
 
-    """
-    xlsx like:
-
-    序号/班级 学号 姓名 邮箱 小测1 小测2 小测3 ... 总评成绩
-    1   2018000001 张三 example.com 100 100 100 ... 100
-    """
-
     students_num = students.sheet_size()[1]
 
     with open(config.select("content"), "r") as f:
