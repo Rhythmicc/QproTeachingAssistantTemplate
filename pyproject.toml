@@ -1,0 +1,14 @@
+[tool.qpro]
+[[tool.qpro.server_targets]]
+user = ""
+host = ""
+port = 22
+path = ""
+
+[tool.qpro.config]
+build = ""
+entry_point = "QproTeachingAssistantTemplate/main.py"
+executable = "python3 -m QproTeachingAssistantTemplate.main"
+input_file = "dist/input.txt"
+template_root = "template/"
+enable_complete = true
